@@ -70,7 +70,8 @@ const UserProfile = ({
             </Text>
             {/* 商品出店数 */}
             <Text marginBottom={1} marginTop={0} as="p">
-              {numberOfProducts}点出品済
+              {/* {numberOfProducts}点出品済 */}
+              -
             </Text>
             {/* ユーザー概要 */}
             {variant === 'normal' && (

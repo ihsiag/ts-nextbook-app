@@ -186,7 +186,7 @@ Button.defaultProps = {
   paddingRight: 2,
   paddingTop: 1,
   paddingBottom: 1,
-  color: 'white',
+  color: 'black',
   display: 'inline-block',
   textAlign: 'center',
   lineHeight: 'inherit',

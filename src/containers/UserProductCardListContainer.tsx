@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
+import AddItemCard from 'components/organisms/AddItemCard'
 import ProductCard from 'components/organisms/ProductCard'
 import ProductCardList from 'components/organisms/ProductCardList'
 import useSearch from 'services/products/use-search'
@@ -35,6 +36,14 @@ const UserProductCardListContainer = ({
 
   return (
     <ProductCardList numberPerRow={6} numberPerRowForMobile={2}>
+      <Link href={`/sell`} passHref>
+        <a>
+          <AddItemCard
+            variant="small"
+            imageUrl="/elements/plus.png"
+          />
+        </a>
+      </Link>
       {userProducts.map((p) => (
         <Fragment key={p.id}>
           <Link href={`/products/${p.id}`} passHref>
@@ -43,7 +52,7 @@ const UserProductCardListContainer = ({
               <ProductCard
                 variant="small"
                 title={p.title}
-                price={p.price}
+                itemNumber={p.itemNumber}
                 imageUrl={p.imageUrl}
               />
             </a>

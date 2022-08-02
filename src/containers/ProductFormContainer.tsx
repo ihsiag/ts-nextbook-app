@@ -27,12 +27,11 @@ const ProductFormContainer = ({ onSave }: ProductFormContainerProps) => {
 
     const product = {
       image: data.image,
-      title: data.title,
+      displayName:data.displayName,
+      name: data.name,
       description: data.description,
-      category: data.category,
-      condition: data.condition,
-      price: Number(data.price),
-      imageUrl: '/products/shoes/feet-1840619_1920.jpeg', // ダミー画像
+      imageUrl: '/materials/no_material.jpg', // ダミー画像
+      price: data.price,
       blurDataUrl: '',
       owner: authUser,
     }

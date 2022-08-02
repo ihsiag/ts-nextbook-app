@@ -1,27 +1,27 @@
-import { Controller, useForm } from 'react-hook-form'
-import Button from 'components/atoms/Button'
-import Input from 'components/atoms/Input'
-import Text from 'components/atoms/Text'
-import TextArea from 'components/atoms/TextArea'
-import Box from 'components/layout/Box'
-import Dropdown from 'components/molecules/Dropdown'
-import InputImages, { FileData } from 'components/molecules/InputImages'
-import type { Category, Condition } from 'types'
+import { Controller, useForm } from "react-hook-form";
+import Button from "components/atoms/Button";
+import Input from "components/atoms/Input";
+import Text from "components/atoms/Text";
+import TextArea from "components/atoms/TextArea";
+import Box from "components/layout/Box";
+import Dropdown from "components/molecules/Dropdown";
+import InputImages, { FileData } from "components/molecules/InputImages";
+import type { Category, Condition } from "types";
 
 export type ProductFormData = {
-  image: FileData[]
-  title: string
-  description: string
-  category: Category
-  condition: Condition
-  price: string
-}
+  image: FileData[];
+  displayName: string;
+  name: string;
+  description:string;
+  imageUrl: string;
+  price:number|string;
+};
 
 interface ProductFormProps {
   /**
    * 出品ボタンを押した時のイベントハンドラ
    */
-  onProductSave?: (data: ProductFormData) => void
+  onProductSave?: (data: ProductFormData) => void;
 }
 
 /**
@@ -34,20 +34,19 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<ProductFormData>()
+  } = useForm<ProductFormData>();
   const onSubmit = (data: ProductFormData) => {
-    onProductSave && onProductSave(data)
-  }
+    onProductSave && onProductSave(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box marginBottom={3}>
         <Box marginBottom={2}>
           <Text as="label" variant="mediumLarge" fontWeight="bold">
-            商品の写真
+            建材の写真
           </Text>
         </Box>
-        {/* 商品画像の入力 */}
         <Controller
           control={control}
           name="image"
@@ -71,22 +70,38 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
       <Box marginBottom={3}>
         <Box marginBottom={2}>
           <Text as="label" variant="mediumLarge" fontWeight="bold">
-            商品情報
+            建材情報
           </Text>
         </Box>
         <Box marginBottom={1}>
           <Text as="label" variant="medium">
-            タイトル
+            建材名
           </Text>
-          {/* 商品タイトルの入力 */}
           <Input
-            {...register('title', { required: true })}
-            name="title"
+            {...register("displayName", { required: true })}
+            name="displayName"
             type="text"
-            placeholder="商品のタイトル"
-            hasError={!!errors.title}
+            placeholder="建材名"
+            hasError={!!errors.displayName}
           />
-          {errors.title && (
+          {errors.displayName && (
+            <Text color="danger" variant="small" paddingLeft={1}>
+              タイトルの入力は必須です
+            </Text>
+          )}
+        </Box>
+        <Box marginBottom={1}>
+          <Text as="label" variant="medium">
+            型番
+          </Text>
+          <Input
+            {...register("name", { required: true })}
+            name="name"
+            type="text"
+            placeholder="型番"
+            hasError={!!errors.name}
+          />
+          {errors.name && (
             <Text color="danger" variant="small" paddingLeft={1}>
               タイトルの入力は必須です
             </Text>
@@ -96,14 +111,13 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
           <Text as="label" variant="medium">
             概要
           </Text>
-          {/* 商品概要の入力 */}
           <Controller
             control={control}
             name="description"
             rules={{ required: true }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextArea
-                placeholder="最高の商品です！"
+                placeholder="概要"
                 hasError={!!error}
                 onChange={onChange}
               >
@@ -117,11 +131,10 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
             </Text>
           )}
         </Box>
-        <Box marginBottom={1}>
+        {/* <Box marginBottom={1}>
           <Text as="label" variant="medium">
             カテゴリ
           </Text>
-          {/* カテゴリのドロップダウン */}
           <Controller
             control={control}
             name="category"
@@ -146,12 +159,11 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
               カテゴリの選択は必須です
             </Text>
           )}
-        </Box>
-        <Box marginBottom={1}>
+        </Box> */}
+        {/* <Box marginBottom={1}>
           <Text as="label" variant="medium">
             商品の状態
           </Text>
-          {/* 商品の状態のドロップダウン */}
           <Controller
             control={control}
             name="condition"
@@ -175,17 +187,17 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
               商品の状態の入力は必須です
             </Text>
           )}
-        </Box>
+        </Box> */}
         <Box>
           <Text as="label" variant="medium">
             価格 (円)
           </Text>
           {/* 価格の入力 */}
           <Input
-            {...register('price', { required: true })}
+            {...register("price", { required: true })}
             name="price"
             type="number"
-            placeholder="100"
+            placeholder="価格"
             hasError={!!errors.price}
           />
           {errors.price && (
@@ -196,10 +208,10 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
         </Box>
       </Box>
       <Button width="100%" type="submit">
-        出品
+        建材を登録する
       </Button>
     </form>
-  )
-}
+  );
+};
 
-export default ProductForm
+export default ProductForm;

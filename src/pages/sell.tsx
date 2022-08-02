@@ -43,9 +43,6 @@ const SellPage: NextPage = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Box display={{ base: 'none', md: 'block' }} marginBottom={2}>
-            <AppLogo />
-          </Box>
           <Box width="100%">
             {/*
               商品投稿フォームコンテナ

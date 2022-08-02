@@ -43,7 +43,7 @@ const CartContainer = () => {
           id={p.id}
           imageUrl={p.imageUrl}
           title={p.title}
-          price={p.price}
+          itemNumber={p.itemNumber}
           onRemoveButtonClick={handleRemoveButtonClick}
           onBuyButtonClick={handleBuyButtonClick}
         />

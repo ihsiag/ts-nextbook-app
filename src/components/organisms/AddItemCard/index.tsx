@@ -2,27 +2,26 @@ import styled from "styled-components";
 import ScaleImage from "components/atoms/ScaleImage";
 import Text from "components/atoms/Text";
 import Box from "components/layout/Box";
+import Flex from "components/layout/Flex";
 
-interface ProductCardProps {
-  displayName: string;
-  name: string;
+interface AddItemCardProps {
   imageUrl: string;
   blurDataUrl?: string;
   variant?: "listing" | "small" | "detail";
 }
 
 // 商品カードのコンテナ
-const ProductCardContainer = styled.div`
+const AddItemCardContainer = styled.div`
   position: relative;
 `;
 
 // 商品カード画像のコンテナ
-const ProductCardImageContainer = styled.div`
+const AddItemCardImageContainer = styled.div`
   z-index: 99;
 `;
 
 // 商品カードの情報
-const ProductCardInfo = styled.div`
+const AddItemCardInfo = styled.div`
   position: absolute;
   z-index: 100;
   top: 0px;
@@ -32,13 +31,11 @@ const ProductCardInfo = styled.div`
 /**
  * 商品カード
  */
-const ProductCard = ({
-  displayName,
-  name,
+const AddItemCard = ({
   imageUrl,
   blurDataUrl,
   variant = "listing",
-}: ProductCardProps) => {
+}: AddItemCardProps) => {
   const { size, imgSize } = (() => {
     switch (variant) {
       case "detail":
@@ -51,10 +48,10 @@ const ProductCard = ({
   })();
 
   return (
-    <ProductCardContainer>
+    <AddItemCardContainer>
       {variant !== "small" && (
-        <ProductCardInfo>
-          {/* <Box>
+        <AddItemCardInfo>
+          <Box>
             <Text
               as="h2"
               fontSize={{ base: "small", md: "mediumLarge" }}
@@ -67,25 +64,12 @@ const ProductCard = ({
               paddingTop={0}
               paddingBottom={0}
             >
-              {displayName}
+              追加する
             </Text>
-            <Text
-              as="span"
-              fontWeight="bold"
-              display="inline-block"
-              backgroundColor="white"
-              fontSize={{ base: "extraSmall", md: "medium" }}
-              lineHeight={{ base: "8px", md: "12px" }}
-              letterSpacing={{ base: 2, md: 4 }}
-              margin={0}
-              padding={{ base: 1, md: 2 }}
-            >
-              型番 : {name}
-            </Text>
-          </Box> */}
-        </ProductCardInfo>
+          </Box>
+        </AddItemCardInfo>
       )}
-      <ProductCardImageContainer>
+      <AddItemCardImageContainer>
         {blurDataUrl && (
           <ScaleImage
             src={imageUrl}
@@ -108,19 +92,16 @@ const ProductCard = ({
             objectFit="cover"
           />
         )}
-      </ProductCardImageContainer>
+      </AddItemCardImageContainer>
       {variant === "small" && (
-        <Box marginTop={1}>
-          <Text as="h2" variant="medium" margin={0} padding={0}>
-            {displayName}
+        <Flex marginTop={1} justifyContent="flex-start">
+          <Text as="h2" variant="medium" width ="auto" margin={0} padding={0}>
+            新規建材の登録
           </Text>
-          <Text as="span" variant="medium">
-            型番 : {name}
-          </Text>
-        </Box>
+        </Flex>
       )}
-    </ProductCardContainer>
+    </AddItemCardContainer>
   );
 };
 
-export default ProductCard;
+export default AddItemCard;
