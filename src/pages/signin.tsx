@@ -36,11 +36,6 @@ const SigninPage: NextPage = () => {
           alignItems="center"
         >
           <Box width="100%">
-            {/*
-              サインインフォームコンテナ
-              SigninFormのユーザー名・パスワードから認証APIを呼び出し、
-              onSigninコールバックが呼び出される
-            */}
             <SigninFormContainer onSignin={handleSignin} />
           </Box>
         </Flex>

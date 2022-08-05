@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ScaleImage from "components/atoms/ScaleImage";
 import Text from "components/atoms/Text";
 import Box from "components/layout/Box";
+import { PropsWithChildren } from "react";
 
 interface ProductCardProps {
   displayName: string;
@@ -11,17 +12,17 @@ interface ProductCardProps {
   variant?: "listing" | "small" | "detail";
 }
 
-// 商品カードのコンテナ
+
 const ProductCardContainer = styled.div`
   position: relative;
 `;
 
-// 商品カード画像のコンテナ
+
 const ProductCardImageContainer = styled.div`
   z-index: 99;
 `;
 
-// 商品カードの情報
+
 const ProductCardInfo = styled.div`
   position: absolute;
   z-index: 100;
@@ -29,9 +30,7 @@ const ProductCardInfo = styled.div`
   left: 0px;
 `;
 
-/**
- * 商品カード
- */
+
 const ProductCard = ({
   displayName,
   name,
@@ -49,42 +48,9 @@ const ProductCard = ({
         return { size: { base: "160px" }, imgSize: 160 };
     }
   })();
-
+  console.log(displayName);
   return (
     <ProductCardContainer>
-      {variant !== "small" && (
-        <ProductCardInfo>
-          {/* <Box>
-            <Text
-              as="h2"
-              fontSize={{ base: "small", md: "mediumLarge" }}
-              letterSpacing={{ base: 2, md: 3 }}
-              lineHeight={{ base: "32px", md: "48px" }}
-              backgroundColor="white"
-              margin={0}
-              paddingRight={2}
-              paddingLeft={2}
-              paddingTop={0}
-              paddingBottom={0}
-            >
-              {displayName}
-            </Text>
-            <Text
-              as="span"
-              fontWeight="bold"
-              display="inline-block"
-              backgroundColor="white"
-              fontSize={{ base: "extraSmall", md: "medium" }}
-              lineHeight={{ base: "8px", md: "12px" }}
-              letterSpacing={{ base: 2, md: 4 }}
-              margin={0}
-              padding={{ base: 1, md: 2 }}
-            >
-              型番 : {name}
-            </Text>
-          </Box> */}
-        </ProductCardInfo>
-      )}
       <ProductCardImageContainer>
         {blurDataUrl && (
           <ScaleImage
