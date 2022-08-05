@@ -8,19 +8,20 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "prettier" //これでESLintの不要なルールが無効化される。なお、他の設定をオーバーライドできるように、必ず配列の末尾に"prettier"を記入する必要がある。
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "import/order": [2, { "alphabetize": { "order": "asc" } }],
+    // "import/order": [2, { "alphabetize": { "order": "asc" } }],
     "prettier/prettier": [
       "error",
       {
         "trailingComma": "all",
         "endOfLine": "lf",
-        "semi": false,
-        "singleQuote": true,
-        "printWidth": 80,
+        "semi": true,
+        "singleQuote": false,
+        "printWidth": 360,
         "tabWidth": 2
       }
     ]
