@@ -25,16 +25,25 @@ const HomePage: NextPage = () => {
         <Flex
           justifyContent={"center"}
         >
-          {!authUser && !isLoading ? (
-          <Link href="/signin">
+          {authUser ? (
+            <Flex flexDirection={"column"} alignItems={"center"}>
+            <Button onClick ={signout}>
+              <Text as="h1">サインアウトする</Text>
+            </Button> 
+            <Link href ={`/users/${authUser.id}`}>
+              <Anchor>
+                <Text as ="h1">
+                  マイページへ
+                </Text>
+              </Anchor>
+            </Link>          
+          </Flex>
+          ) : (
+            <Link href="/signin">
             <Anchor>
               <Text as="h1">サインインする</Text>
             </Anchor>
           </Link>
-          ) : (
-            <Button onClick ={signout}>
-              <Text as="h1">サインアウトする</Text>
-            </Button>            
           )}
         </Flex>
       </Flex>
