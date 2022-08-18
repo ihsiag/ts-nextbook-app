@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Text from "components/atoms/Text";
 import Button from "components/atoms/Button";
@@ -18,32 +19,47 @@ const Anchor = styled(Text)`
 
 const HomePage: NextPage = () => {
   useAuthGaurd();
-  const { authUser, isLoading,signout } = useAuthContext();
+  const { authUser, isLoading, signout } = useAuthContext();
+  const router = useRouter();
+  const handleSignout = async () => {
+    try {
+      await signout();
+      router.reload();
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        // エラーの内容を表示
+        window.alert(err.message);
+      }
+    } finally {
+    }
+  };
   return (
     <Layout>
-      <Flex width ="100%" height="100%" padding={4} justifyContent="center" alignItems="center">
-        <Flex
-          justifyContent={"center"}
-        >
+      <Flex
+        width="100%"
+        height="100%"
+        padding={4}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Flex justifyContent={"center"}>
           {authUser ? (
             <Flex flexDirection={"column"} alignItems={"center"}>
-            <Button onClick ={signout}>
-              <Text as="h1">サインアウトする</Text>
-            </Button> 
-            <Link href ={`/users/${authUser.id}`}>
-              <Anchor>
-                <Text as ="h1">
-                  マイページへ
-                </Text>
-              </Anchor>
-            </Link>          
-          </Flex>
+              <Button onClick={handleSignout}>
+                <Text as="h1">サインアウトする</Text>
+              </Button>
+              <Link href={`/users/${authUser.id}`}>
+                <Anchor>
+                  <Text as="h1">マイページへ</Text>
+                </Anchor>
+              </Link>
+            </Flex>
           ) : (
             <Link href="/signin">
-            <Anchor>
-              <Text as="h1">サインインする</Text>
-            </Anchor>
-          </Link>
+              <Anchor>
+                <Text as="h1">サインインする</Text>
+              </Anchor>
+            </Link>
           )}
         </Flex>
       </Flex>
