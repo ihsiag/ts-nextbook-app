@@ -6,7 +6,6 @@ import TextArea from "components/atoms/TextArea";
 import Box from "components/layout/Box";
 import Dropdown from "components/molecules/Dropdown";
 import InputImages, { FileData } from "components/molecules/InputImages";
-import type { Category, Condition } from "types";
 
 export type ProductFormData = {
   image: FileData[];

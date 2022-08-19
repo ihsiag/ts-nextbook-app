@@ -30,7 +30,7 @@ const ProductFormContainer = ({ onSave }: ProductFormContainerProps) => {
       displayName:data.displayName,
       name: data.name,
       description: data.description,
-      imageUrl: '/materials/no_material.jpg', // ダミー画像
+      imageUrl: data.image[0].src, // ダミー画像
       price: data.price,
       blurDataUrl: '',
       owner: authUser,
